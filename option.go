@@ -210,6 +210,7 @@ func DirOfLog() string {
 
 // AppName gets application name.
 func AppName() string {
+	appName := os.Getenv("_APPNAME")
 	if appName == "" {
 		appName = filepath.Base(os.Args[0])
 	}
