@@ -4,21 +4,21 @@ log库对zap库 ([github.com/uber-go/zap](http://github.com/uber-go/zap "github.
 
 ## 安装
 
-------
+---
 
 ```go
-go get github.com/game1991/service-lib-log
+go get github.com/golang-aLib/log
 ```
 
 ## 快速开始
 
-------
+---
 
 ```go
 package main
 
 import (
-	"github.com/game1991/service-lib-log"
+	"github.com/golang-aLib/log"
 )
 
 func main() {
@@ -34,9 +34,7 @@ func main() {
 
 ### 日志示例
 
-------
-
-
+---
 
 ```json
 {
@@ -57,7 +55,7 @@ func main() {
 
 #### 初始化
 
-------
+---
 
 ##### 函数式选项模式
 
@@ -65,7 +63,7 @@ func main() {
 package main
 
 import (
-	"github.com/game1991/service-lib-log"
+	"github.com/golang-aLib/log"
 )
 
 func main() {
@@ -86,34 +84,23 @@ func main() {
 ```
 
 - WithOutput(output string)：设置日志输出方式，可取参数值为stdout(标准输出)和file，若为stdout，则与文件相关的设置均无用。
-
 - WithLevelString(level string)：设置日志输出等级，可取参数值为debug、info、warn、error、panic、fatal。
-
 - WithJSONEncode(isJSON bool)：设置是否JSON输出，默认值为true。
-
 - log.WithDir(dir string)：设置日志文件路径，默认从基础环境变量中_APP_LOG_DIR取值，如果未配置环境变量，则默认地址（"/home/www/logs" + appName），本地开发时需给该目录授权：
 
   ```bash
   sudo mkdir -p /home/www/logs
   sudo chmod 777 /home/www/logs
   ```
-
 - WithFileName(filename string)：设置日志文件名，默认值为default.log。
-
 - WithAddCaller(caller bool)：是否打印caller，默认值为true。
-
 - WithCallerSkip(skip int)：caller跳过数，默认值为2。
-
 - WithRotateConfig(maxSize, maxAge, maxBackups int, compress bool)：设置日志rotate信息。
 
   - maxsize：日志文件最大 size（MB），默认值为128。
-
   - maxAge：旧日志文件最大保存时间（天），默认值为30。
-
   - maxBackups：旧日志文件保留最大数量，默认值为7。
-
   - compress：是否需要压缩滚动日志，默认值为false。
-
 - WithFields(fields map[string]interface{})：设置日志默认字段与其值。
 
 ##### 结构体参数
@@ -122,7 +109,7 @@ func main() {
 package main
 
 import (
-	"github.com/game1991/service-lib-log"
+	"github.com/golang-aLib/log"
 	"config"
 )
 
@@ -163,15 +150,15 @@ func main() {
 
 #### 在go-micro中使用
 
-------
+---
 
-go-micro（<https://github.com/micro/go-micro>) 中默认使用的是自己的logger日志库，它默认打印的是非json格式的日志，这里将其接口基于zap日志库进行了实现，从而打印json日志，具体用法如下：
+go-micro（[https://github.com/micro/go-micro](https://github.com/micro/go-micro)) 中默认使用的是自己的logger日志库，它默认打印的是非json格式的日志，这里将其接口基于zap日志库进行了实现，从而打印json日志，具体用法如下：
 
 ```go
 package main
 
 import (
-	"pkg.deepin.com/service/lib/log"
+	"github.com/golang-aLib/log"
 	"github.com/micro/go-micro/v2/logger"
 )
 
@@ -183,7 +170,7 @@ func main() {
 
 #### 动态调整日志级别
 
-------
+---
 
 ```bash
 kill -10 pid      //切换日志级别至debug
@@ -192,7 +179,7 @@ kill -12 pid      //切换日志级别至error
 
 #### 日志格式建议
 
-------
+---
 
 日志主要记录在何时，何模块，发生什么，参数是什么。格式建议如下：
 
@@ -207,7 +194,7 @@ log.Error("user login failed", "theme", "user", "username", “lsw”, "err", er
 
 #### 日志级别定义
 
-------
+---
 
 日志级别由低到高：
 
